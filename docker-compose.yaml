@@ -1,0 +1,8 @@
+version: '3' 
+services:  
+    ibkr_gateway: 
+      image: gateway_image 
+      build: ./gateway 
+      container_name: gateway 
+      ports:
+      - "80:5000"
