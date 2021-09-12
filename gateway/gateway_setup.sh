@@ -1,10 +1,10 @@
 #!/bin/bash
 
 wget -O gateway.zip https://download2.interactivebrokers.com/portal/clientportal.gw.zip \
-&& mkdir -p gateway \
-&& rm -f gateway/* \
+&& if [ -d "gateway" ]; then rm -Rf gateway; fi \
+&& mkdir  gateway \
 && unzip gateway.zip -d gateway/ \
 && rm gateway.zip \
-&& cd gateway \
+&& mv ip_list* gateway && cd gateway \
 && ./ip_list.sh \
 && bin/run.sh root/conf.yaml
