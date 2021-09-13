@@ -1,8 +1,14 @@
 # InteractiveBrokers Gateway
-This project allows to run IBKR Gateway headless in docker.
+This project allows to run IBKR Gateway headless in the docker container.
 
-You can run data collecting programs or trading algorithms with IBKR API's without any GUI.
+You can run data collecting programs, trading algorithms or use IBKR API's in any way without `GUI`.
+Authentication is made through the internet browser (password login and 2FA), accesablie from the list of provided `IP` addresses.
 
+## PREREQUISITS
+```
+docker version 20.10.7 [tested on version, others may also work]
+docker-compose version 3
+```
 ## Run
 If you wish to use this, just clone this repo:
 
@@ -21,16 +27,24 @@ This will create a container exposed at port `:80`, then you can access it in an
 
 It handles login/password and the 2FA authentication.
 
-You can get <HOST_IP_ADDRESS> with:
+You should login in browser and see 'Client login succeeds'
 
+Example request:
 ```
-curl ifconfig.me
+curl https://<YOUR_IP_ADDRESS>:80/v1/api/tickle -k 
 ```
+or
+```
+curl https://$(curl ifconfig.me):80/v1/api/tickle -k 
+```
+You can get your <HOST_IP_ADDRESS> with: `curl ifconfig.me`
 
 or many other ways
 ## Configuration
-By default access to Gateway is disabled, thi scan be changed by configuring:
-> gateway/ip_list
+By default access to Gateway is disabled, thi scan be changed by configuring file:
+> path: gateway/ip_list
 
-Insert as many `IPs` as you need, line by line. This repo contains template of this file and should be changed!
+Insert as many `IPs` as you need, line by line. This repo contains template of this file, that should be changed.
 
+##### Disclousre
+I am not affiliated in any way with Interactive Brokers. This software is free to use, provided "as is" without warranty of any kind.
