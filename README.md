@@ -1,8 +1,9 @@
 # InteractiveBrokers Gateway
-This project allows to run IBKR Gateway headless in the docker container.
+This project allows to run IBKR Gateway headless, while being able to authenticate on the go from any device with internet access.
 
-You can run data collecting programs, trading algorithms or use IBKR API's in any way without `GUI`.
-Authentication is made through the internet browser (password login and 2FA), accesible from the list of provided `IP` addresses.
+Authentication is made through the internet browser (password login and 2FA), device used to authenictae needs to have `IP address` whitelisted by user.
+
+You can run data collecting programs, trading algorithms or use IBKR API's in any other way without having to deal with `GUI`.
 
 ## PREREQUISITS
 ```
@@ -33,20 +34,19 @@ Example request:
 ```
 curl https://<YOUR_IP_ADDRESS>:80/v1/api/tickle -k 
 ```
-or
-```
-curl https://$(curl ifconfig.me):80/v1/api/tickle -k 
-```
-You can get your <HOST_IP_ADDRESS> with: `curl ifconfig.me`
+You can get your <HOST_IP_ADDRESS> with for example: `curl ifconfig.me` or many other ways
 
-or many other ways
 ## Configuration
 By default access to Gateway is disabled, this can be changed by configuring file:
 > path: gateway/ip_list
 
 Insert as many `IPs` as you need, line by line. This repo contains template of this file, that should be changed.
 
-You should also secure `https` with cerificate, it is safest to make API calls from the same host.
-
-##### Disclousre
+## Security
+This is a simplified implementation, and it should be secured as good as possible.
+`HTTPS` cominitcation shoudl be encrypted with a certificate, it would be best to use this in a isolated network.
+Strict FW rules are adviced, preferably only port `80` is exposed outside the host.
+</br>
+</br>
+##### Disclousure
 I am not affiliated in any way with Interactive Brokers. This software is free to use, provided "as is" without warranty of any kind.
